@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+    <head>
+
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <meta http-equiv = "Content-Security-Policy" content = "default-src 'self'; script-src 'self'"/>
+        <meta http-equiv = "X-Content-Security-Policy" content = "default-src 'self'; script-src 'self'"/>
+        <link rel = "stylesheet" href = "../css/style.css">
+        <link rel = "stylesheet" href = "../assets/bootstrap/bootstrap.min.css">
+        <title>Vending Machine - Adriano</title>
+
+    </head>
+
+    <body>
+
+        <video autoplay loop id = "video_background" preload = "auto" muted>
+
+            <source src = "../videos/bg.mp4" type = "video/mp4" />
+
+        </video>
+
+        <div class = "container-fluid p-3 main-container">
+
+            <div class = "d-flex mt-3 machine-container">
+
+
+
+            </div>
+
+            <div class = "w-100 d-flex justify-content-around buttons-container">
+
+                <button class = "text-white machine-button" id = "open-machine-button" data-bs-toggle = "modal" data-bs-target = "#open-machine-modal">OPEN MACHINE</button>
+                <button class = "text-white machine-button" id = "insert-money-button" data-bs-toggle = "modal" data-bs-target = "#insert-money-modal">INSERT MONEY</button>
+
+            </div>
+
+        </div>
+
+        <!-- Modal del menú de abrir la máquina -->
+        <div class = "modal fade" id = "open-machine-modal" tabindex = "-1" aria-labelledby = "openMachineModalLabel" aria-hidden = "true">
+
+            <div class = "modal-dialog modal-dialog-centered modal-90">
+
+                <div class = "modal-content border-white retro-border">
+
+                    <div class = "modal-header border-0">
+
+                        <h1 class = "modal-title fs-5 text-white" id = "exampleModalLabel">VENDING MACHINE MENU</h1>
+                        <button type = "button" class = "btn-close text-white" data-bs-dismiss = "modal" aria-label = "Close"></button>
+
+                    </div>
+
+                    <div class="modal-body text-white">
+
+                        Content
+
+                    </div>
+
+                    <div class = "modal-footer border-0">
+
+                        <button type = "button" class = "btn btn-secondary text-white retro-border" data-bs-dismiss = "modal">Exit</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Modal para insertar dinero -->
+        <div class = "modal fade" id = "insert-money-modal" tabindex = "-1" aria-labelledby = "insertMoneyModalLabel" aria-hidden = "true">
+
+            <div class = "modal-dialog modal-dialog-centered modal-90">
+
+                <div class = "modal-content border-white retro-border">
+
+                    <div class = "modal-header border-0">
+
+                        <h1 class = "modal-title text-white fs-5" id = "exampleModalLabel">INSERT MONEY</h1>
+                        <button type = "button" class = "btn-close text-white" data-bs-dismiss = "modal" aria-label = "Close"></button>
+
+                    </div>
+
+                    <div class="modal-body text-white">
+
+                        <div class="row g-2">
+                            <div class="col-4 col-md-3 col-lg-2">
+                                <div class="card bg-dark border-white text-center">
+                                    <img src="../images/money/10cent.png" class="card-img-top p-2" alt="10 cents">
+                                    <div class="card-body p-2">
+                                        <h6 class="card-title mb-2">€0.10</h6>
+                                        <button class="text-white btn-sm w-100 machine-button">INSERT</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-3 col-lg-2">
+                                <div class="card bg-dark border-white text-center">
+                                    <img src="../images/money/20cent.png" class="card-img-top p-2" alt="20 cents">
+                                    <div class="card-body p-2">
+                                        <h6 class="card-title mb-2">€0.20</h6>
+                                        <button class="text-white btn-sm w-100 machine-button">INSERT</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-3 col-lg-2">
+                                <div class="card bg-dark border-white text-center">
+                                    <img src="../images/money/50cent.png" class="card-img-top p-2" alt="50 cents">
+                                    <div class="card-body p-2">
+                                        <h6 class="card-title mb-2">€0.50</h6>
+                                        <button class="text-white btn-sm w-100 machine-button">INSERT</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-3 col-lg-2">
+                                <div class="card bg-dark border-white text-center">
+                                    <img src="../images/money/1eur.png" class="card-img-top p-2" alt="1 euro">
+                                    <div class="card-body p-2">
+                                        <h6 class="card-title mb-2">€1.00</h6>
+                                        <button class="text-white btn-sm w-100 machine-button">INSERT</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-3 col-lg-2">
+                                <div class="card bg-dark border-white text-center">
+                                    <img src="../images/money/2eur.png" class="card-img-top p-2" alt="2 euros">
+                                    <div class="card-body p-2">
+                                        <h6 class="card-title mb-2">€2.00</h6>
+                                        <button class="text-white btn-sm w-100 machine-button">INSERT</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-3 col-lg-2">
+                                <div class="card bg-dark border-white text-center">
+                                    <img src="../images/money/5eur.png" class="card-img-top p-2" alt="5 euros">
+                                    <div class="card-body p-2">
+                                        <h6 class="card-title mb-2">€5.00</h6>
+                                        <button class="text-white btn-sm w-100 machine-button">INSERT</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-3 col-lg-2">
+                                <div class="card bg-dark border-white text-center">
+                                    <img src="../images/money/10eur.png" class="card-img-top p-2" alt="10 euros">
+                                    <div class="card-body p-2">
+                                        <h6 class="card-title mb-2">€10.00</h6>
+                                        <button class="text-white btn-sm w-100 machine-button">INSERT</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 col-md-3 col-lg-2">
+                                <div class="card bg-dark border-white text-center">
+                                    <img src="../images/money/20eur.png" class="card-img-top p-2" alt="20 euros">
+                                    <div class="card-body p-2">
+                                        <h6 class="card-title mb-2">€20.00</h6>
+                                        <button class="text-white btn-sm w-100 machine-button">INSERT</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class = "modal-footer border-0">
+
+                        <button type = "button" class = "btn btn-secondary text-white retro-border" data-bs-dismiss = "modal">Exit</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <script src = "../assets/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src = "https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    </body>
+
+</html>

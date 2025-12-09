@@ -1,0 +1,108 @@
+@font-face {
+    font-family: "Pixellari";
+    src: url("../fonts/Pixellari.ttf");
+}
+
+#video_background {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1000;
+    overflow: hidden;
+}
+
+#video_pattern {
+    background: #fff;
+    position: fixed;
+    opacity: 0.8;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+body {
+    font-family: "Pixellari", sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container{
+    height: 95vh;
+    width: 100%;
+}
+
+.machine-container {
+    height: 100%;
+    width: 100%;
+    background-image: url("../images/machine/machine7.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.machine-image {
+    height: 100%;
+    width: 100%;
+}
+
+.buttons-container {
+    font-family: "Pixellari";
+}
+
+.machine-button {
+    background: linear-gradient(90deg, #3F2B96 0%, #6c559b 100%);
+    padding: 1% 3%;
+    border-radius: 0px;
+    border: 2px solid #ffffff;
+}
+
+.modal {
+    font-family: "Pixellari";
+}
+
+.modal-content {
+    background: linear-gradient(90deg, rgba(63,43,150,1) 0%, rgba(108,85,155,1) 100%);
+    border: none;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+.card-img-top {
+    height: 100px;
+    object-fit: contain;
+}
+
+.retro-border {
+    border-radius: 0px;
+    border: 4px solid #ffffff;
+}
+
+.modal-90 {
+    width: 90vw !important;
+    height: 90vh;
+    max-width: 90vw !important;
+}
+
+.modal-90 .modal-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-90 .modal-body {
+    flex: 1;
+    overflow-y: auto;
+}

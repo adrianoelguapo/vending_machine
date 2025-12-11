@@ -26,46 +26,51 @@
             <div class = "d-flex mt-3 machine-container justify-content-center align-items-center">
 
                 <!-- Pixel Art Vending Machine -->
-                <div class="vending-machine">
-                    
-                    <!-- Machine Top -->
-                    <div class="machine-top"></div>
+                <div class="vending-machine d-flex flex-column align-items-center w-100 h-100">
                     
                     <!-- Machine Body -->
-                    <div class="machine-body">
+                    <div class="machine-body w-100">
                         
-                        <div class="machine-content">
+                        <div class="machine-content d-flex mb-3">
                             
                             <!-- Left Side: Product Display -->
                             <div class="left-section">
                                 <div class="product-display">
                                     <div class="glass-panel">
-                                        <div class="glass-reflection"></div>
-                                        <div class="product-grid">
-                                            <div class="product-row">
-                                                <div class="product-slot"></div>
-                                                <div class="product-slot"></div>
-                                                <div class="product-slot"></div>
-                                                <div class="product-slot"></div>
-                                                <div class="product-slot"></div>
-                                            </div>
-                                            <div class="product-row">
-                                                <div class="product-slot"></div>
-                                                <div class="product-slot"></div>
-                                                <div class="product-slot"></div>
-                                                <div class="product-slot"></div>
-                                                <div class="product-slot"></div>
-                                            </div>
-                                            <div class="product-row">
-                                                <div class="product-slot"></div>
-                                                <div class="product-slot"></div>
+                                        <div class="glass-reflection w-100 h-50"></div>
+                                        <div class="product-grid d-flex flex-column">
+                                            <div class="product-row d-flex justify-content-between">
+                                                <!-- <div class="product-slot d-flex flex-column align-items-center">
+                                                    
+                                                    <div class="product-slot-img-container">
+
+                                                        <img src="../images/products/marlboro.png" class="product-slot-img">
+
+                                                    </div>
+
+                                                    <p class="product-slot-code d-flex justify-content-center align-items-center mt-2 text-white">11</p>
+
+                                                </div> -->
                                                 <div class="product-slot"></div>
                                                 <div class="product-slot"></div>
                                                 <div class="product-slot"></div>
                                             </div>
-                                            <div class="product-row">
+                                            <div class="product-row d-flex justify-content-between">
                                                 <div class="product-slot"></div>
                                                 <div class="product-slot"></div>
+                                                <div class="product-slot"></div>
+                                            </div>
+                                            <div class="product-row d-flex justify-content-between">
+                                                <div class="product-slot"></div>
+                                                <div class="product-slot"></div>
+                                                <div class="product-slot"></div>
+                                            </div>
+                                            <div class="product-row d-flex justify-content-between">
+                                                <div class="product-slot"></div>
+                                                <div class="product-slot"></div>
+                                                <div class="product-slot"></div>
+                                            </div>
+                                            <div class="product-row d-flex justify-content-between">
                                                 <div class="product-slot"></div>
                                                 <div class="product-slot"></div>
                                                 <div class="product-slot"></div>
@@ -76,38 +81,38 @@
                             </div>
                             
                             <!-- Right Side: Display Screen & Control Panel -->
-                            <div class="right-section">
+                            <div class="right-section d-flex flex-column">
                                 
                                 <!-- Display Screen -->
                                 <div class="display-screen">
-                                    <div class="screen-inner">
-                                        <div class="screen-text">VENDING MACHINE</div>
+                                    <div class="screen-inner h-100 text-center">
+                                        <div class="screen-text text-black">ZENO VENDING</div>
                                     </div>
                                 </div>
                                 
                                 <!-- Control Panel -->
-                                <div class="control-panel">
-                                    <div class="keypad">
-                                        <div class="key-row">
-                                            <div class="key">1</div>
-                                            <div class="key">2</div>
-                                            <div class="key">3</div>
+                                <div class="control-panel d-flex flex-column">
+                                    <div class="keypad d-flex flex-column w-100">
+                                        <div class="key-row d-flex justify-content-center">
+                                            <div class="key d-flex justify-content-center align-items-center text-white">1</div>
+                                            <div class="key d-flex justify-content-center align-items-center text-white">2</div>
+                                            <div class="key d-flex justify-content-center align-items-center text-white">3</div>
                                         </div>
-                                        <div class="key-row">
-                                            <div class="key">4</div>
-                                            <div class="key">5</div>
-                                            <div class="key">6</div>
+                                        <div class="key-row d-flex justify-content-center">
+                                            <div class="key d-flex justify-content-center align-items-center text-white">4</div>
+                                            <div class="key d-flex justify-content-center align-items-center text-white">5</div>
+                                            <div class="key d-flex justify-content-center align-items-center text-white">6</div>
                                         </div>
-                                        <div class="key-row">
-                                            <div class="key">7</div>
-                                            <div class="key">8</div>
-                                            <div class="key">9</div>
+                                        <div class="key-row d-flex justify-content-center">
+                                            <div class="key d-flex justify-content-center align-items-center text-white">7</div>
+                                            <div class="key d-flex justify-content-center align-items-center text-white">8</div>
+                                            <div class="key d-flex justify-content-center align-items-center text-white">9</div>
                                         </div>
                                     </div>
                                     
-                                    <div class="coin-slot-area">
+                                    <div class="coin-slot-area d-flex flex-column align-items-center">
                                         <div class="coin-slot"></div>
-                                        <div class="coin-label">INSERT COIN</div>
+                                        <div class="coin-label d-flex justify-content-center align-items-center text-white w-50 h-100" id = "insert-money-button" data-bs-toggle = "modal" data-bs-target = "#insert-money-modal">INSERT MONEY</div>
                                     </div>
                                 </div>
                                 
@@ -129,16 +134,9 @@
 
             </div>
 
-            <div class = "w-100 d-flex justify-content-around buttons-container">
-
-                <button class = "text-white machine-button" id = "open-machine-button" data-bs-toggle = "modal" data-bs-target = "#open-machine-modal">OPEN MACHINE</button>
-                <button class = "text-white machine-button" id = "insert-money-button" data-bs-toggle = "modal" data-bs-target = "#insert-money-modal">INSERT MONEY</button>
-
-            </div>
-
         </div>
 
-        <!-- Modal del menú de abrir la máquina -->
+        <!-- Modal del menú de abrir la máquina /// id = "open-machine-button" data-bs-toggle = "modal" data-bs-target = "#open-machine-modal" -->
         <div class = "modal fade" id = "open-machine-modal" tabindex = "-1" aria-labelledby = "openMachineModalLabel" aria-hidden = "true">
 
             <div class = "modal-dialog modal-dialog-centered modal-90">

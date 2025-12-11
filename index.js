@@ -11,7 +11,6 @@ const createWindow = () => {
     }
   });
 
-  //win.maximize(); // https://github.com/electron/electron/issues/7076
   win.loadFile('./html/index.html');
 };
 

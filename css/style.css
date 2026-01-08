@@ -1,0 +1,663 @@
+@font-face {
+  font-family: "Pixellari";
+  src: url("../fonts/Pixellari.ttf");
+}
+
+
+#video_background {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1000;
+  overflow: hidden;
+}
+
+
+body {
+  font-family: "Pixellari", sans-serif;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  height: 100vh;
+  width: 100%;
+}
+
+.machine-container {
+  height: 100%;
+  width: 100%;
+}
+
+
+.machine-body {
+  height: 97%;
+  background: linear-gradient(90deg, #9b45fd 0%, #7a49b3 50%, #6026a3 100%);
+  border: 4px solid #000;
+  padding: 15px;
+  box-shadow: inset 0 0 0 4px #a662f5, 8px 8px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.machine-content {
+  gap: 15px;
+  height: 90%;
+}
+
+.left-section {
+  flex: 2;
+}
+
+.right-section {
+  flex: 1;
+  gap: 15px;
+}
+
+
+.display-screen {
+  background: #2c3e50;
+  border: 4px solid #000;
+  padding: 8px;
+  box-shadow: inset 0 0 0 2px #34495e;
+  height: 30%;
+}
+
+.screen-inner {
+  background: #1abc9c;
+  border: 2px solid #000;
+  padding: 10px;
+}
+
+.screen-text {
+  font-family: "Pixellari", monospace;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+#screen-messages {
+  font-family: "Pixellari", monospace;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  margin-top: 8px;
+  padding: 5px;
+  max-height: 100px;
+  overflow-y: auto;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+
+.product-display {
+  background: #34495E;
+  border: 4px solid #000;
+  padding: 10px;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.glass-panel {
+  background: rgba(173, 216, 230, 0.3);
+  border: 2px solid #000;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.glass-reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg,rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.product-slot {
+  background: linear-gradient(135deg, #1e2a38 0%, #2c3e50 100%);
+  border: 3px solid #000;
+  box-shadow: 
+    inset 0 0 0 2px #34495e,
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  transition: all 0.2s ease;
+}
+
+.product-slot:hover {
+  box-shadow: 
+    inset 0 0 0 2px #1abc9c,
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    0 0 12px rgba(26, 188, 156, 0.4);
+  transform: scale(1.02);
+}
+
+.product-slot-img-container {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.product-slot-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+  image-rendering: crisp-edges;
+}
+
+.product-slot-code {
+  font-family: "Pixellari", monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin: 0;
+  padding: 4px 8px;
+  flex-shrink: 0;
+  text-align: center;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid #1abc9c;
+  border-radius: 2px;
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(26, 188, 156, 0.2);
+  text-shadow: 1px 1px 2px #000;
+}
+
+
+.control-panel {
+  margin-top: 32.5%;
+  gap: 15px;
+  flex: 1;
+}
+
+.keypad {
+  gap: 15px;
+}
+
+.key-row {
+  gap: 6px;
+}
+
+.key {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #555555 0%, #2e2e2e 100%);
+  border: 3px solid #000;
+  font-family: "Pixellari", monospace;
+  font-size: 25px;
+  box-shadow: inset 0 0 0 2px #5c5c5c, 2px 2px 0 rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.key img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  rotate: 45deg;
+}
+
+.key:hover {
+  scale: 1.05;
+}
+
+.key:active {
+  transform: translate(2px, 2px);
+  box-shadow: inset 0 0 0 2px #747474;
+}
+
+
+.coin-slot-area {
+  gap: 8px;
+  margin-top: auto;
+  height: 15%;
+}
+
+.coin-slot {
+  width: 20%;
+  background: #000;
+  border: 4px solid #000;
+}
+
+.coin-label {
+  font-family: "Pixellari", monospace;
+  font-size: 12px;
+  background: #000;
+  padding: 4px 8px;
+  border: 2px solid #1abc9c;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.coin-label:hover{
+  scale: 1.05;
+}
+
+
+.dispenser-tray {
+  background: #2c3e50;
+  border: 4px solid #000;
+  padding: 8px;
+  box-shadow: inset 0 0 0 2px #34495e;
+  height: 9%;
+}
+
+.tray-opening {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border: 2px solid #1abc9c;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.9);
+}
+
+
+.modal {
+  font-family: "Pixellari";
+}
+
+
+.modal-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 1000;
+  border-radius: 8px;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #3f2b96 0%, #6c559b 50%, #4a3580 100%);
+  border: none;
+  position: relative;
+  overflow: hidden;
+
+  box-shadow: 
+    0 0 0 4px #ffffff,
+    0 0 0 8px #1a1a1a,
+    0 0 0 12px #ffffff,
+    0 8px 16px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+
+.modal-content::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+  background: #1abc9c;
+  box-shadow: 
+    0 0 8px #1abc9c,
+    0 0 16px rgba(26, 188, 156, 0.5);
+  z-index: 999;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.modal-header {
+  border-bottom: 3px solid #1abc9c;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
+  position: relative;
+  z-index: 1001;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.modal-title {
+  text-shadow: 
+    2px 2px 0 #000,
+    4px 4px 8px rgba(26, 188, 156, 0.5);
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 1001;
+}
+
+.modal-body {
+  position: relative;
+  z-index: 1001;
+  padding: 2rem;
+}
+
+.modal-footer {
+  border-top: 3px solid #1abc9c;
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  position: relative;
+  z-index: 1001;
+  padding: 1.5rem;
+}
+
+.btn-close {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  position: relative;
+  z-index: 1001;
+}
+
+.machine-button {
+  background: linear-gradient(135deg, #3f2b96 0%, #6c559b 100%);
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  border: 3px solid #ffffff;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: 
+    0 4px 0 #1a1a1a,
+    0 6px 8px rgba(0, 0, 0, 0.4);
+  text-shadow: 1px 1px 0 #000;
+}
+
+.machine-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 0 #1a1a1a,
+    0 8px 12px rgba(0, 0, 0, 0.5),
+    0 0 16px rgba(26, 188, 156, 0.3);
+  border-color: #1abc9c;
+}
+
+.machine-button:active {
+  transform: translateY(2px);
+  box-shadow: 
+    0 2px 0 #1a1a1a,
+    0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.card-img-top {
+  height: 100px;
+  object-fit: contain;
+}
+
+.retro-border {
+  border-radius: 0px;
+  border: 4px solid #ffffff;
+}
+
+.modal-90 {
+  width: 90vw !important;
+  height: 50vh !important;
+  max-width: 90vw !important;
+}
+
+.modal-90 .modal-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.modal-90 .modal-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+
+
+#insert-money-modal.show {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.modal-bottom-sheet {
+    width: 95vw;
+    max-width: 95vw !important;
+    height: 60vh;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.modal-bottom-sheet .modal-content {
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-bottom-sheet .modal-body {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.modal-menu {
+  width: 50vw !important;
+  max-width: 50vw !important;
+}
+
+.modal-menu .modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-menu .modal-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.menu-option-btn {
+  font-size: 1.25rem;
+  padding: 1rem;
+}
+
+
+.product-restock-card {
+  background: linear-gradient(135deg, #2c1f5a 0%, #4a3580 100%);
+  border: 3px solid #ffffff;
+  border-radius: 4px;
+  padding: 1rem;
+  position: relative;
+  box-shadow: 
+    0 0 0 2px #1a1a1a,
+    0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+}
+
+.product-restock-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 0 0 2px #1a1a1a,
+    0 6px 12px rgba(0, 0, 0, 0.6),
+    0 0 16px rgba(26, 188, 156, 0.2);
+}
+
+.restock-product-img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.restock-product-name {
+  font-family: "Pixellari", monospace;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.restock-product-code {
+  font-family: "Pixellari", monospace;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+.restock-product-quantity {
+  font-family: "Pixellari", monospace;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 0 #000;
+}
+
+.restock-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.restock-label {
+  font-family: "Pixellari", monospace;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.restock-quantity-input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: "Pixellari", monospace;
+  font-size: 1rem;
+  padding: 0.5rem;
+  text-align: center;
+  transition: border-color 0.2s ease;
+}
+
+.restock-quantity-input:focus {
+  outline: none;
+  border-color: #1abc9c;
+  box-shadow: 0 0 8px rgba(26, 188, 156, 0.3);
+}
+
+.restock-btn {
+  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+  margin-top: 0.5rem;
+}
+
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #6c559b #2c1f5a;
+}
+
+
+.total-money-display {
+  background: linear-gradient(135deg, #2c1f5a 0%, #4a3580 100%);
+  border: 3px solid #1abc9c;
+  border-radius: 4px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 
+    0 0 0 2px #1a1a1a,
+    0 4px 8px rgba(0, 0, 0, 0.5),
+    0 0 16px rgba(26, 188, 156, 0.3);
+  margin-bottom: 1rem;
+}
+
+.total-money-display h4 {
+  font-family: "Pixellari", monospace;
+  text-shadow: 2px 2px 0 #000;
+  margin-bottom: 1rem;
+}
+
+.withdraw-all-btn {
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  border: 3px solid #ffffff;
+  transition: all 0.2s ease;
+}
+
+.withdraw-all-btn:hover {
+  background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 0 #1a1a1a,
+    0 8px 12px rgba(0, 0, 0, 0.5),
+    0 0 16px rgba(231, 76, 60, 0.5);
+}
+
+
+.retro-input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: "Pixellari", monospace;
+  font-size: 1rem;
+  padding: 0.5rem;
+  transition: border-color 0.2s ease;
+}
+
+.retro-input:focus {
+  outline: none;
+  border-color: #1abc9c;
+  box-shadow: 0 0 8px rgba(26, 188, 156, 0.3);
+  background: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+}
+
+.retro-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}

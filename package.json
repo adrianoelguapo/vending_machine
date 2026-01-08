@@ -1,0 +1,20 @@
+{
+  "name": "vendingmachine---adriano",
+  "version": "1.0.0",
+  "description": "Práctica Máquina Expendedora",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "Adriano",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^39.2.7"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "mongodb": "^7.0.0",
+    "nodemon": "^3.1.11"
+  }
+}

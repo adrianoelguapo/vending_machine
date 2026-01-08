@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' https://code.jquery.com; script-src 'self' https://code.jquery.com 'unsafe-inline';"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self' https://code.jquery.com; script-src 'self' https://code.jquery.com 'unsafe-inline';"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/bootstrap.min.css" />
+    <title>Vending Machine - Adriano</title>
+  </head>
+
+  <body>
+    <!-- Vídeo de fondo -->
+    <video autoplay loop id="video_background" preload="auto" muted>
+      <source src="../videos/bg.mp4" type="video/mp4" />
+    </video>
+
+    <div class="container-fluid p-3 main-container">
+      <div
+        class="d-flex mt-3 machine-container justify-content-center align-items-center"
+      >
+        <!-- Máquina -->
+        <div
+          class="vending-machine d-flex flex-column align-items-center w-100 h-100"
+        >
+          <!-- Cuerpo de la Máquina -->
+          <div class="machine-body w-100">
+            <div class="machine-content d-flex mb-3">
+              <!-- Sección izquierda: Productos -->
+              <div class="left-section">
+                <div class="product-display">
+                  <div class="glass-panel">
+                    <div class="glass-reflection w-100 h-50"></div>
+
+                    <div class="product-grid">
+                      <div class="d-flex justify-content-between">
+                        <div class="product-slot"></div>
+                        <div class="product-slot"></div>
+                        <div class="product-slot"></div>
+                      </div>
+
+                      <div class="d-flex justify-content-between">
+                        <div class="product-slot"></div>
+                        <div class="product-slot"></div>
+                        <div class="product-slot"></div>
+                      </div>
+
+                      <div class="d-flex justify-content-between">
+                        <div class="product-slot"></div>
+                        <div class="product-slot"></div>
+                        <div class="product-slot"></div>
+                      </div>
+
+                      <div class="d-flex justify-content-between">
+                        <div class="product-slot"></div>
+                        <div class="product-slot"></div>
+                        <div class="product-slot"></div>
+                      </div>
+
+                      <div class="d-flex justify-content-between">
+                        <div class="product-slot"></div>
+                        <div class="product-slot"></div>
+                        <div class="product-slot"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sección Derecha: Pantalla y Botonera -->
+              <div class="right-section d-flex flex-column">
+                <!-- Pantalla -->
+                <div class="display-screen">
+                  <div class="screen-inner h-100 text-center">
+                    <div class="screen-text text-black">ZENO VENDING</div>
+                    <div class="screen-text text-black" id="credit-display">
+                      CREDIT: 0.00€
+                    </div>
+                    <div id="screen-messages" class="text-black"></div>
+                  </div>
+                </div>
+
+                <!-- Botonera -->
+                <div class="control-panel d-flex flex-column">
+                  <div class="keypad d-flex flex-column w-100">
+                    <div class="key-row d-flex justify-content-center">
+                      <div
+                        class="key d-flex justify-content-center align-items-center text-white"
+                      >
+                        1
+                      </div>
+                      <div
+                        class="key d-flex justify-content-center align-items-center text-white"
+                      >
+                        2
+                      </div>
+                      <div
+                        class="key d-flex justify-content-center align-items-center text-white"
+                      >
+                        3
+                      </div>
+                    </div>
+
+                    <div class="key-row d-flex justify-content-center">
+                      <div
+                        class="key d-flex justify-content-center align-items-center text-white"
+                      >
+                        4
+                      </div>
+                      <div
+                        class="key d-flex justify-content-center align-items-center text-white"
+                      >
+                        5
+                      </div>
+                      <div
+                        class="key d-flex justify-content-center align-items-center text-white"
+                      >
+                        6
+                      </div>
+                    </div>
+
+                    <div class="key-row d-flex justify-content-center">
+                      <div
+                        class="key d-flex justify-content-center align-items-center text-white"
+                      >
+                        7
+                      </div>
+                      <div
+                        class="key d-flex justify-content-center align-items-center text-white"
+                      >
+                        8
+                      </div>
+                      <div
+                        class="key d-flex justify-content-center align-items-center text-white"
+                      >
+                        9
+                      </div>
+                    </div>
+
+                    <div class="key-row d-flex justify-content-center">
+                      <div
+                        class="key d-flex justify-content-center align-items-center text-white"
+                      >
+                        X
+                      </div>
+                      <div
+                        class="key d-flex justify-content-center align-items-center text-white"
+                      >
+                        0
+                      </div>
+                      <div
+                        class="key d-flex justify-content-center align-items-center text-white"
+                      >
+                        <img src="../images/icons/key.png" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="coin-slot-area d-flex flex-column align-items-center"
+                  >
+                    <div class="coin-slot"></div>
+                    <div
+                      class="coin-label d-flex justify-content-center align-items-center text-white w-50 h-100"
+                      id="insert-money-button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#insert-money-modal"
+                    >
+                      INSERT MONEY
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sección Inferior: Dispensador -->
+            <div class="dispenser-tray">
+              <div class="tray-opening"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal del menú de abrir la máquina -->
+    <div
+      class="modal fade"
+      id="open-machine-modal"
+      tabindex="-1"
+      aria-labelledby="openMachineModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="false"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-menu">
+        <div class="modal-content border-white retro-border">
+          <div class="modal-header border-0">
+            <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">
+              MACHINE MENU
+            </h1>
+            <button
+              type="button"
+              class="btn-close text-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body text-white">
+            <div class="d-grid gap-3">
+              <button
+                type="button"
+                class="btn machine-button text-white retro-border menu-option-btn"
+                data-bs-dismiss="modal"
+                data-bs-toggle="modal"
+                data-bs-target="#restock-product-modal"
+              >
+                Restock Product
+              </button>
+              <button
+                type="button"
+                class="btn machine-button text-white retro-border menu-option-btn"
+                data-bs-dismiss="modal"
+                data-bs-toggle="modal"
+                data-bs-target="#change-price-modal"
+              >
+                Change Price
+              </button>
+              <button
+                type="button"
+                class="btn machine-button text-white retro-border menu-option-btn"
+                data-bs-dismiss="modal"
+                data-bs-toggle="modal"
+                data-bs-target="#withdraw-money-modal"
+              >
+                Withdraw Money
+              </button>
+              <button
+                type="button"
+                class="btn machine-button text-white retro-border menu-option-btn"
+                data-bs-dismiss="modal"
+                data-bs-toggle="modal"
+                data-bs-target="#change-product-modal"
+              >
+                Change Product
+              </button>
+            </div>
+          </div>
+
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn btn-secondary text-white retro-border"
+              data-bs-dismiss="modal"
+            >
+              Exit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Reponer Producto -->
+    <div
+      class="modal fade"
+      id="restock-product-modal"
+      tabindex="-1"
+      aria-labelledby="restockProductModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="false"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-90">
+        <div class="modal-content border-white retro-border">
+          <div class="modal-header border-0">
+            <h1
+              class="modal-title text-white fs-5"
+              id="restockProductModalLabel"
+            >
+              RESTOCK PRODUCT
+            </h1>
+            <button
+              type="button"
+              class="btn-close text-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body text-white">
+            <div id="restock-products-container" class="row g-3">
+              <!-- Aquí se cargan los productos -->
+            </div>
+          </div>
+
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn btn-secondary text-white retro-border"
+              data-bs-dismiss="modal"
+              data-bs-toggle="modal"
+              data-bs-target="#open-machine-modal"
+            >
+              Back to Menu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Cambiar Precio -->
+    <div
+      class="modal fade"
+      id="change-price-modal"
+      tabindex="-1"
+      aria-labelledby="changePriceModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="false"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-90">
+        <div class="modal-content border-white retro-border">
+          <div class="modal-header border-0">
+            <h1 class="modal-title text-white fs-5" id="changePriceModalLabel">
+              CHANGE PRICE
+            </h1>
+            <button
+              type="button"
+              class="btn-close text-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body text-white">
+            <div id="change-price-products-container" class="row g-3">
+              <!-- Aquí se cargan los productos -->
+            </div>
+          </div>
+
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn btn-secondary text-white retro-border"
+              data-bs-dismiss="modal"
+              data-bs-toggle="modal"
+              data-bs-target="#open-machine-modal"
+            >
+              Back to Menu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Retirar Dinero -->
+    <div
+      class="modal fade"
+      id="withdraw-money-modal"
+      tabindex="-1"
+      aria-labelledby="withdrawMoneyModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="false"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-90">
+        <div class="modal-content border-white retro-border">
+          <div class="modal-header border-0">
+            <h1
+              class="modal-title text-white fs-5"
+              id="withdrawMoneyModalLabel"
+            >
+              WITHDRAW MONEY
+            </h1>
+            <button
+              type="button"
+              class="btn-close text-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body text-white">
+            <div id="withdraw-money-container" class="row g-3">
+              <!-- Aquí se carga el dinero -->
+            </div>
+          </div>
+
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn btn-secondary text-white retro-border"
+              data-bs-dismiss="modal"
+              data-bs-toggle="modal"
+              data-bs-target="#open-machine-modal"
+            >
+              Back to Menu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Cambiar Producto -->
+    <div
+      class="modal fade"
+      id="change-product-modal"
+      tabindex="-1"
+      aria-labelledby="changeProductModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="false"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-90">
+        <div class="modal-content border-white retro-border">
+          <div class="modal-header border-0">
+            <h1
+              class="modal-title text-white fs-5"
+              id="changeProductModalLabel"
+            >
+              CHANGE PRODUCT
+            </h1>
+            <button
+              type="button"
+              class="btn-close text-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body text-white">
+            <div id="change-product-list-container" class="row g-3">
+              <!-- Aquí se cargan los productos -->
+            </div>
+          </div>
+
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn btn-secondary text-white retro-border"
+              data-bs-dismiss="modal"
+              data-bs-toggle="modal"
+              data-bs-target="#open-machine-modal"
+            >
+              Back to Menu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Formulario de Cambio de Producto -->
+    <div
+      class="modal fade"
+      id="change-product-form-modal"
+      tabindex="-1"
+      aria-labelledby="changeProductFormModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="false"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-white retro-border">
+          <div class="modal-header border-0">
+            <h1
+              class="modal-title text-white fs-5"
+              id="changeProductFormModalLabel"
+            >
+              CHANGE PRODUCT - CODE:
+              <span id="change-product-code-display"></span>
+            </h1>
+            <button
+              type="button"
+              class="btn-close text-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body text-white">
+            <div class="alert alert-warning mb-3" role="alert">
+              <strong>Important:</strong> Only PNG images are accepted.
+            </div>
+
+            <form id="change-product-form">
+              <div class="mb-3">
+                <label for="change-product-name-input" class="form-label"
+                  >Product Name:</label
+                >
+
+                <input
+                  type="text"
+                  class="form-control retro-input"
+                  id="change-product-name-input"
+                  placeholder="Enter product name"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="change-product-price-input" class="form-label"
+                  >Price (€):</label
+                >
+
+                <input
+                  type="number"
+                  class="form-control retro-input"
+                  id="change-product-price-input"
+                  min="0.01"
+                  step="0.01"
+                  placeholder="Enter price"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="change-product-image-input" class="form-label"
+                  >Product Image (PNG only):</label
+                >
+
+                <input
+                  type="file"
+                  class="form-control retro-input"
+                  id="change-product-image-input"
+                  accept=".png"
+                />
+
+                <div class="mt-2">
+                  <img
+                    id="image-preview"
+                    src=""
+                    alt="Image Preview"
+                    class="img-thumbnail"
+                    style="max-height: 200px; display: none"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn btn-secondary text-white retro-border"
+              id="back-to-product-list"
+            >
+              Back to List
+            </button>
+
+            <button
+              type="button"
+              class="btn machine-button text-white retro-border"
+              id="submit-change-product"
+            >
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de confirmación para devolver dinero -->
+    <div
+      class="modal fade"
+      id="return-money-modal"
+      tabindex="-1"
+      aria-labelledby="returnMoneyModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="false"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-white retro-border">
+          <div class="modal-header border-0">
+            <h1 class="modal-title text-white fs-5" id="returnMoneyModalLabel">
+              RETURN MONEY
+            </h1>
+
+            <button
+              type="button"
+              class="btn-close text-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body text-white text-center">
+            <p>Are you sure you want to return your money?</p>
+            <p class="mb-0">Current credit will be lost.</p>
+          </div>
+
+          <div class="modal-footer border-0 justify-content-center">
+            <button
+              type="button"
+              class="btn btn-secondary text-white retro-border"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="button"
+              id="confirm-return-money"
+              class="btn machine-button text-white retro-border"
+              data-bs-dismiss="modal"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para insertar dinero -->
+    <div
+      class="modal fade"
+      id="insert-money-modal"
+      tabindex="-1"
+      aria-labelledby="insertMoneyModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="false"
+    >
+      <div class="modal-dialog modal-bottom-sheet">
+        <div class="modal-content border-white retro-border">
+          <div class="modal-header border-0">
+            <h1 class="modal-title text-white fs-5" id="exampleModalLabel">
+              INSERT MONEY
+            </h1>
+
+            <button
+              type="button"
+              class="btn-close text-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body text-white">
+            <div class="row g-2">
+              <div class="col-4 col-md-3 col-lg-2">
+                <div class="card bg-dark border-white text-center">
+                  <img
+                    src="../images/money/10cent.png"
+                    class="card-img-top p-2"
+                    alt="10 cents"
+                  />
+                  <div class="card-body p-2">
+                    <h6 class="card-title mb-2">€0.10</h6>
+                    <button
+                      class="text-white btn-sm w-100 machine-button insert-money-btn"
+                      data-denomination-id="1"
+                    >
+                      INSERT
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-4 col-md-3 col-lg-2">
+                <div class="card bg-dark border-white text-center">
+                  <img
+                    src="../images/money/20cent.png"
+                    class="card-img-top p-2"
+                    alt="20 cents"
+                  />
+                  <div class="card-body p-2">
+                    <h6 class="card-title mb-2">€0.20</h6>
+                    <button
+                      class="text-white btn-sm w-100 machine-button insert-money-btn"
+                      data-denomination-id="2"
+                    >
+                      INSERT
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-4 col-md-3 col-lg-2">
+                <div class="card bg-dark border-white text-center">
+                  <img
+                    src="../images/money/50cent.png"
+                    class="card-img-top p-2"
+                    alt="50 cents"
+                  />
+                  <div class="card-body p-2">
+                    <h6 class="card-title mb-2">€0.50</h6>
+                    <button
+                      class="text-white btn-sm w-100 machine-button insert-money-btn"
+                      data-denomination-id="3"
+                    >
+                      INSERT
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-4 col-md-3 col-lg-2">
+                <div class="card bg-dark border-white text-center">
+                  <img
+                    src="../images/money/1eur.png"
+                    class="card-img-top p-2"
+                    alt="1 euro"
+                  />
+                  <div class="card-body p-2">
+                    <h6 class="card-title mb-2">€1.00</h6>
+                    <button
+                      class="text-white btn-sm w-100 machine-button insert-money-btn"
+                      data-denomination-id="4"
+                    >
+                      INSERT
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-4 col-md-3 col-lg-2">
+                <div class="card bg-dark border-white text-center">
+                  <img
+                    src="../images/money/2eur.png"
+                    class="card-img-top p-2"
+                    alt="2 euros"
+                  />
+                  <div class="card-body p-2">
+                    <h6 class="card-title mb-2">€2.00</h6>
+                    <button
+                      class="text-white btn-sm w-100 machine-button insert-money-btn"
+                      data-denomination-id="5"
+                    >
+                      INSERT
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-4 col-md-3 col-lg-2">
+                <div class="card bg-dark border-white text-center">
+                  <img
+                    src="../images/money/5eur.png"
+                    class="card-img-top p-2"
+                    alt="5 euros"
+                  />
+                  <div class="card-body p-2">
+                    <h6 class="card-title mb-2">€5.00</h6>
+                    <button
+                      class="text-white btn-sm w-100 machine-button insert-money-btn"
+                      data-denomination-id="6"
+                    >
+                      INSERT
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-4 col-md-3 col-lg-2">
+                <div class="card bg-dark border-white text-center">
+                  <img
+                    src="../images/money/10eur.png"
+                    class="card-img-top p-2"
+                    alt="10 euros"
+                  />
+                  <div class="card-body p-2">
+                    <h6 class="card-title mb-2">€10.00</h6>
+                    <button
+                      class="text-white btn-sm w-100 machine-button insert-money-btn"
+                      data-denomination-id="7"
+                    >
+                      INSERT
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-4 col-md-3 col-lg-2">
+                <div class="card bg-dark border-white text-center">
+                  <img
+                    src="../images/money/20eur.png"
+                    class="card-img-top p-2"
+                    alt="20 euros"
+                  />
+                  <div class="card-body p-2">
+                    <h6 class="card-title mb-2">€20.00</h6>
+                    <button
+                      class="text-white btn-sm w-100 machine-button insert-money-btn"
+                      data-denomination-id="8"
+                    >
+                      INSERT
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn btn-secondary text-white retro-border"
+              data-bs-dismiss="modal"
+            >
+              Exit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
